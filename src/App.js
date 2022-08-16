@@ -1,6 +1,5 @@
-import { ChakraProvider, theme, Box } from "@chakra-ui/react";
+import { ChakraProvider, theme } from "@chakra-ui/react";
 import Chat from "./pages/Chat";
-import Login from "./pages/Login";
 
 const App = () => {
   return (

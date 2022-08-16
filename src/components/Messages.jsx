@@ -1,16 +1,15 @@
 import React, { useEffect, useRef } from "react";
-import { Avatar, Flex, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 var tabID = sessionStorage.tabID ? sessionStorage.tabID : sessionStorage.tabID = "Tab-"+Math.random().toString(36).slice(2, 7)
 const user =JSON.parse(localStorage.getItem(tabID));
 const Messages = ({ messages }) => {
-	console.log(messages)
 
   const AlwaysScrollToBottom = () => {
 	const elementRef = useRef();
 	useEffect(() => elementRef.current.scrollIntoView());
 	return <div ref={elementRef} />;
   };
-
+//localStorage.removeItem(tabID);
   return (
 	<Flex w="100%" h="80%" overflowY="scroll" flexDirection="column" p="3">
   	{messages.map((item, index) => {
@@ -21,7 +20,7 @@ const Messages = ({ messages }) => {
             	bg="black"
             	color="white"
             	minW="100px"
-            	maxW="350px"
+            	maxW="600px"
             	my="1"
             	p="3"
           	>
@@ -43,12 +42,12 @@ const Messages = ({ messages }) => {
             	bg="gray.100"
             	color="black"
             	minW="100px"
-            	maxW="350px"
+            	maxW="600px"
             	my="1"
             	p="3"
 
           	>
-				<Text>{item.from}</Text>:
+				<Text>{item.name}</Text>:
 				&nbsp;&nbsp;&nbsp;&nbsp;
             	<Text>{item.text}</Text>
           	</Flex>
