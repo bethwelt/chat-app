@@ -73,19 +73,12 @@ const Login = () =>  {
 
           name="name"
           placeholder="Username"
-        //   onChange={validateName}
           value ={value}
           onChange={(e)=> setValue(e.currentTarget.value)} 
-        //   onKeyPress={e=> {
-        //      if (e.key === 'Enter') {
-        //         location.assign('?wd=' + value)
-        //      }
-        //   }}
-          //ref={register({ validate: validateName })}
+      
         />
         <FormErrorMessage>
             Username is required
-          {/* {errors.name && errors.name.message} */}
         </FormErrorMessage>
       </FormControl>
 

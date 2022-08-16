@@ -1,18 +1,29 @@
-import React, { useEffect, useRef } from "react";
-import { Flex, Text } from "@chakra-ui/react";
+import React, { useEffect, useRef,useState } from "react";
+import { Flex, Text,Button } from "@chakra-ui/react";
 var tabID = sessionStorage.tabID ? sessionStorage.tabID : sessionStorage.tabID = "Tab-"+Math.random().toString(36).slice(2, 7)
 const user =JSON.parse(localStorage.getItem(tabID));
-const Messages = ({ messages }) => {
+const PerRow = 10;
 
+const Messages = ({ messages }) => {
+	
   const AlwaysScrollToBottom = () => {
 	const elementRef = useRef();
 	useEffect(() => elementRef.current.scrollIntoView());
 	return <div ref={elementRef} />;
   };
+  const [next, setNext] = useState(PerRow);
+  
+  const handleMore = () => {
+    setNext(next + PerRow);
+  };
+  
+
+	
+  
 //localStorage.removeItem(tabID);
   return (
-	<Flex w="100%" h="80%" overflowY="scroll" flexDirection="column" p="3">
-  	{messages.map((item, index) => {
+	<Flex w="100%" h="90%" overflowY="scroll" flexDirection="column" p="3">
+  	{messages?.slice(0, next)?.map((item, index) => {
     	if (item.from === user.id) {
       	return (
         	<Flex key={index} w="100%" justify="flex-end">
@@ -55,6 +66,17 @@ const Messages = ({ messages }) => {
       	);
     	}
   	})}
+
+     {next < messages?.length && (
+          <Button
+            mt={4}
+			colorScheme="teal"
+            onClick={handleMore}
+          >
+            Load more
+          </Button>
+        )}
+
   	<AlwaysScrollToBottom />
 	</Flex>
   );

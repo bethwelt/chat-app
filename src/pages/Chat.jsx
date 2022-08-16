@@ -10,18 +10,16 @@ const user =JSON.parse(localStorage.getItem(tabID));
 const chats =JSON.parse(localStorage.getItem('chats'));
 
 const Chat = () => {
+    
     const channel = new BroadcastChannel('app-data');
-    const data =[];
     channel.addEventListener ('message', (event) => {
 		//console.log(event.data);
         setMessages(event.data);
 		//data =event.data;
 	   });
 
-       const list = chats === null ?[]:chats
-    
-
-  const [messages, setMessages] = useState(data.length > 0 ?data:list);
+ const list = chats === null ?[]:chats
+  const [messages, setMessages] = useState(list);
   const [inputMessage, setInputMessage] = useState("");
 
   const handleSendMessage = () => {
