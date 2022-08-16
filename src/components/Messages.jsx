@@ -3,6 +3,7 @@ import { Avatar, Flex, Text } from "@chakra-ui/react";
 var tabID = sessionStorage.tabID ? sessionStorage.tabID : sessionStorage.tabID = "Tab-"+Math.random().toString(36).slice(2, 7)
 const user =JSON.parse(localStorage.getItem(tabID));
 const Messages = ({ messages }) => {
+	console.log(messages)
 
   const AlwaysScrollToBottom = () => {
 	const elementRef = useRef();
