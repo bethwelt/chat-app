@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import { Avatar, Flex, Text } from "@chakra-ui/react";
-
+var tabID = sessionStorage.tabID ? sessionStorage.tabID : sessionStorage.tabID = "Tab-"+Math.random().toString(36).slice(2, 7)
+const user =JSON.parse(localStorage.getItem(tabID));
 const Messages = ({ messages }) => {
+
   const AlwaysScrollToBottom = () => {
 	const elementRef = useRef();
 	useEffect(() => elementRef.current.scrollIntoView());
@@ -11,7 +13,7 @@ const Messages = ({ messages }) => {
   return (
 	<Flex w="100%" h="80%" overflowY="scroll" flexDirection="column" p="3">
   	{messages.map((item, index) => {
-    	if (item.from === "me") {
+    	if (item.from === user.id) {
       	return (
         	<Flex key={index} w="100%" justify="flex-end">
           	<Flex
@@ -22,6 +24,8 @@ const Messages = ({ messages }) => {
             	my="1"
             	p="3"
           	>
+				<Text>{user.name}</Text>:
+				&nbsp;&nbsp;&nbsp;&nbsp;
             	<Text>{item.text}</Text>
           	</Flex>
         	</Flex>
@@ -29,11 +33,11 @@ const Messages = ({ messages }) => {
     	} else {
       	return (
         	<Flex key={index} w="100%">
-          	<Avatar
+          	{/* <Avatar
             	name="Computer"
             	src="https://avataaars.io/?avatarStyle=Transparent&topType=LongHairStraight&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light"
             	bg="blue.300"
-          	></Avatar>
+          	></Avatar> */}
           	<Flex
             	bg="gray.100"
             	color="black"
@@ -41,7 +45,10 @@ const Messages = ({ messages }) => {
             	maxW="350px"
             	my="1"
             	p="3"
+
           	>
+				<Text>{item.from}</Text>:
+				&nbsp;&nbsp;&nbsp;&nbsp;
             	<Text>{item.text}</Text>
           	</Flex>
         	</Flex>
